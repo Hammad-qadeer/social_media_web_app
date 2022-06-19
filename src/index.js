@@ -2,18 +2,36 @@ import React from "react";
 
  import ReactDOM from "react-dom";
 
- const greeting = <h1>This is the greeting from react app</h1>
- const isReactUser = false;
  const rootNode = document.getElementById('root');
 
 
- function sayGreeting () {
-    if(isReactUser){
-       return greeting;
-    }
-    else {
-        return <div>Hello react test user</div>
-    }
- }
+function Header(props) {
+   return <h1>Hello {props.username}</h1>
+}
 
- ReactDOM.render(sayGreeting(), rootNode);
+function Layout(props){
+   return <div style={{background: "palegoldenrod"}}>{props.children}</div>
+}
+
+function Login(){
+   return <p>Please Login!!</p>
+}
+
+function Signout(){
+   return <button>Signout</button>
+}
+
+const isAuthenticated = true;
+
+ ReactDOM.render(
+ <Layout>
+    {isAuthenticated ? (
+   <>
+    <Header username = "Test User"/>
+    <Signout/>
+    </>
+    ) : <Login/>}
+    <footer>Copyright 2022</footer>
+    </Layout>
+ , rootNode
+ );
